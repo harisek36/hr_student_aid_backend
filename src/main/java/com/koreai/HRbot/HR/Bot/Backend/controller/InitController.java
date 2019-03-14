@@ -1,5 +1,6 @@
 package com.koreai.HRbot.HR.Bot.Backend.controller;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,13 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.javafaker.Faker;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
+import com.koreai.HRbot.HR.Bot.Backend.entity.Reimbursement;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
+import com.koreai.HRbot.HR.Bot.Backend.service.ReimbursementService;
 
 
 @RestController
 public class InitController {
 	
 	@Autowired EmployeeService employeeService;
+	
+	@Autowired ReimbursementService reimbursementService;
 	
 	Faker faker;
 	
@@ -64,7 +69,12 @@ public class InitController {
 		Collections.shuffle(employeeList);
 
 		employeeService.saveAllEmployee(employeeList);
-	
+		
+		
+		//Reimbursement
+		
+		Reimbursement reimbursement1 = new Reimbursement("Meal", LocalDate.now(), employee1, employee1.getId(), "PENDING", "Cient meeting at Location", "");
+		reimbursementService.saveReimbursement(reimbursement1);
 	}
 
 }
