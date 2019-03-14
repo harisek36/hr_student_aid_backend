@@ -21,10 +21,9 @@ public class Reimbursement {
 	String type;
 	LocalDate receiptDate;
 	
-	@ManyToOne
-	@JoinColumn(name = "submitter_id")
-	Employee submitter;
+	int submitterId;
 	int receiverId;
+	
 	String status;
 	String submitterComment;
 	String approverComment;
@@ -32,11 +31,11 @@ public class Reimbursement {
 	public Reimbursement() {
 	}
 
-	public Reimbursement(String type, LocalDate receiptDate, Employee submitter, int receiverId, String status,
+	public Reimbursement(String type, LocalDate receiptDate, int submitter, int receiverId, String status,
 			String submitterComment, String approverComment) {
 		this.type = type;
 		this.receiptDate = receiptDate;
-		this.submitter = submitter;
+		this.submitterId = submitter;
 		this.receiverId = receiverId;
 		this.status = status;
 		this.submitterComment = submitterComment;

@@ -12,7 +12,7 @@ import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
 
 @RestController
-@RequestMapping("reimbursement")
+@RequestMapping("employee")
 public class EmployeeController {
 
 	@Autowired

@@ -36,8 +36,8 @@ public class ReimbursementServiceImpl implements ReimbursementService {
 	}
 
 	@Override
-	public void saveReimbursement(Reimbursement reimbursement1) {
-		reimbursementRepository.save(reimbursement1);
+	public Reimbursement saveReimbursement(Reimbursement reimbursement) {
+		return reimbursementRepository.save(reimbursement);
 	}
 
 }

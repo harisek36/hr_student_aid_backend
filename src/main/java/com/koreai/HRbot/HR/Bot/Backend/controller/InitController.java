@@ -73,7 +73,7 @@ public class InitController {
 		
 		//Reimbursement
 		
-		Reimbursement reimbursement1 = new Reimbursement("Meal", LocalDate.now(), employee1, employee1.getId(), "PENDING", "Cient meeting at Location", "");
+		Reimbursement reimbursement1 = new Reimbursement("Meal", LocalDate.now(), employee1.getId(), employee1.getId(), "PENDING", "Cient meeting at Location", "");
 		reimbursementService.saveReimbursement(reimbursement1);
 	}
 

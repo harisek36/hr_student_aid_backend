@@ -8,5 +8,5 @@ public interface ReimbursementService {
 
 	List<Reimbursement> getAllReimbursementByEmpId(int id);
 	Reimbursement getReimbursementById(int id);
-	void saveReimbursement(Reimbursement reimbursement1);
+	Reimbursement saveReimbursement(Reimbursement reimbursement1);
 }
