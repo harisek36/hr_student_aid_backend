@@ -1,4 +1,4 @@
-package com.koreai.HRbot.HR.Bot.Backend.controller;
+package com.koreai.HRbot.HR.Bot.Backend.service;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
 
