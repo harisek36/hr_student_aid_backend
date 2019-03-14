@@ -9,31 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
-import com.koreai.HRbot.HR.Bot.Backend.service.ReimbursementService;
+import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
 
 @RestController
 @RequestMapping("reimbursement")
-public class ReimbursementController {
+public class EmployeeController {
 
 	@Autowired
-	ReimbursementService reimbursementService;
+	EmployeeService employeeService;
 
 	@GetMapping("{employeeId}")
 	ResponseEntity<Employee> getEmployee(@PathVariable int employeeId) {
 
-		Employee employee = new Employee();
-		Employee manager = new Employee();
-
-		employee.setFirstName("John");
-		employee.setLastName("Rothwell");
-		employee.setDesignation("Manager");
-		employee.setManager(manager);
-
-		reimbursementService.createEmployee(employee);
-
-		return ResponseEntity.status(HttpStatus.OK).body(reimbursementService.getEmployee(employeeId));
+		return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployee(employeeId));
 	}
-	
-
 
 }
