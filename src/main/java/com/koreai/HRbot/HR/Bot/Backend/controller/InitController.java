@@ -8,6 +8,8 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.javafaker.Faker;
@@ -15,6 +17,7 @@ import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
 import com.koreai.HRbot.HR.Bot.Backend.service.ReimbursementService;
 
+@CrossOrigin(origins = {"*"},  methods= {RequestMethod.GET, RequestMethod.POST},maxAge = 3600)
 @RestController
 public class InitController {
 
