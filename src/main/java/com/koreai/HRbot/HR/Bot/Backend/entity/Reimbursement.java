@@ -6,28 +6,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
 @Entity
 @Data
 public class Reimbursement {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 	String type;
 	LocalDate receiptDate;
-	
+
 	int submitterId;
 	int receiverId;
-	
+
 	String status;
 	String submitterComment;
 	String approverComment;
-	
+
 	public Reimbursement() {
 	}
 
