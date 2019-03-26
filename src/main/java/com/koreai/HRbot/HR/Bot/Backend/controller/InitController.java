@@ -13,22 +13,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.javafaker.Faker;
+import com.koreai.HRbot.HR.Bot.Backend.entity.EducationLevel;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
+import com.koreai.HRbot.HR.Bot.Backend.entity.Residency;
+import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
 import com.koreai.HRbot.HR.Bot.Backend.service.ReimbursementService;
+import com.koreai.HRbot.HR.Bot.Backend.service.StudentService;
 
-@CrossOrigin(origins = {"*"},  methods= {RequestMethod.GET, RequestMethod.POST},maxAge = 3600)
+@CrossOrigin(origins = { "*" }, methods = { RequestMethod.GET, RequestMethod.POST }, maxAge = 3600)
 @RestController
 public class InitController {
 
 	private static int MANAGER_COUNT = 5;
 	private static int EMPLOYEE_UNDER_MANAGER_COUNT = 15;
+	private static int STUDENT_COUNT = 100;
 
 	@Autowired
 	EmployeeService employeeService;
 
 	@Autowired
 	ReimbursementService reimbursementService;
+
+	@Autowired
+	StudentService studentService;
 
 	Faker faker;
 
@@ -61,12 +69,23 @@ public class InitController {
 			managerList.add(employeeService.createEmployee(employee));
 		}
 
-		// Reimbursement
+		// student
+		for (int i = 1; i <= STUDENT_COUNT; i++) {
+			Student student = new Student(faker.name().firstName(), faker.name().lastName(), randomSSN(),
+					EducationLevel.randomEducationLevel(), Residency.randomEducationLevel());
+			studentService.createStudent(student);
+		}
+	}
 
-		// Reimbursement reimbursement1 = new Reimbursement("Meal", LocalDate.now(),
-		// employee1.getId(), employee1.getId(), "PENDING", "Cient meeting at Location",
-		// "");
-		// reimbursementService.saveReimbursement(reimbursement1);
+	String randomSSN() {
+
+		long timeSeed = System.nanoTime();
+		double randSeed = Math.random() * 1000;
+		long midSeed = (long) (timeSeed * randSeed);
+
+		String s = midSeed + "";
+
+		return s.substring(0, 9);
 	}
 
 }
