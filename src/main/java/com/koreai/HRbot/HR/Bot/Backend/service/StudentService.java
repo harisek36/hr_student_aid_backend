@@ -14,4 +14,6 @@ public interface StudentService {
 	Student updatestudent(Student student, int studentId); 
 
 	List<Student> saveAllStudent(List<Student> studentList);
+	
+	boolean validateStudentObject(Student student);
 }

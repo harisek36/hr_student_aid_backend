@@ -29,9 +29,11 @@ public class StudentController {
 	StudentService studentService;
 
 	@GetMapping("{studentId}")
-	ResponseEntity<Student> getStudentWithId(@PathVariable int studentId) {
+	ResponseEntity<Student> getStudentWithId(@PathVariable int studentId) throws IllegalArgumentException, IllegalAccessException {
+		Student student = studentService.getstudent(studentId);
+		student.setCompleted(studentService.validateStudentObject(student));
 
-		return ResponseEntity.status(HttpStatus.OK).body(studentService.getstudent(studentId));
+		return ResponseEntity.status(HttpStatus.OK).body(student);
 	}
 	
 	@GetMapping
@@ -42,14 +44,16 @@ public class StudentController {
 	
 
 	@PostMapping
-	ResponseEntity<Student> createStudent(@RequestBody Student newStudent) {
+	ResponseEntity<Student> createStudent(@RequestBody Student newStudent) throws IllegalArgumentException, IllegalAccessException {
+		
+		newStudent.setCompleted(studentService.validateStudentObject(newStudent));
 		
 		Student savedStudent = studentService.createStudent(newStudent);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedStudent.getId()).toUri();
 
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).body(savedStudent);
 	}
 	
 	@PutMapping("{studentId}")
