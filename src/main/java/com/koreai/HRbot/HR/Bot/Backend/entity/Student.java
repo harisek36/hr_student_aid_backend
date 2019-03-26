@@ -16,20 +16,33 @@ public class Student {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String ssn;
-	private String educationLevel;
-	private String residency;
-	private boolean completed;
+	private String email;
+	private String phoneNumber;
+//	private String ssn;
+//	private String educationLevel;
+//	private String residency;
+	private boolean completed = false;
 
 	public Student() {
 	}
 
-	public Student(String firstName, String lastName, String ssn, String educationLevel, String residency) {
+	public Student(String firstName, String lastName, String email, String phoneNumber) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.ssn = ssn;
-		this.educationLevel = educationLevel;
-		this.residency = residency;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
 	}
+
+//	public Student(String firstName, String lastName, String ssn, String educationLevel, String residency) {
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.ssn = ssn;
+//		this.educationLevel = educationLevel;
+//		this.residency = residency;
+//		
+//	}
+	
+	
 
 }

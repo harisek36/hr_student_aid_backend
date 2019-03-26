@@ -31,9 +31,8 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.findById(studentId).map(student -> {
 			student.setFirstName(updatedStudent.getFirstName());
 			student.setLastName(updatedStudent.getLastName());
-			student.setSsn(updatedStudent.getSsn());
-			student.setResidency(updatedStudent.getResidency());
-			student.setEducationLevel(updatedStudent.getEducationLevel());
+			student.setEmail(updatedStudent.getEmail());
+			student.setPhoneNumber(updatedStudent.getPhoneNumber());
 			return studentRepository.save(student);
 		}).orElseThrow(() -> new StudentNotFound("Student not found with ID: " + updatedStudent.getId()));
 	}
@@ -46,6 +45,18 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public List<Student> getAllStudents() {
 		return studentRepository.findAll();
+	}
+
+	@Override
+	public boolean validateStudentObject(Student student) {
+		if (student == null) {
+			return false;
+		}
+		if (student.getFirstName() == null || student.getLastName() == null || student.getEmail() == null
+				|| student.getPhoneNumber() == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

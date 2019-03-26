@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.javafaker.Faker;
-import com.koreai.HRbot.HR.Bot.Backend.entity.EducationLevel;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
-import com.koreai.HRbot.HR.Bot.Backend.entity.Residency;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
 import com.koreai.HRbot.HR.Bot.Backend.service.ReimbursementService;
@@ -41,7 +39,7 @@ public class InitController {
 	Faker faker;
 
 	@PostConstruct
-	void employeeTestCreationInit() {
+	void employeeTestCreationInit() throws IllegalArgumentException, IllegalAccessException {
 		faker = new Faker();
 		Random rand = new Random();
 
@@ -71,8 +69,11 @@ public class InitController {
 
 		// student
 		for (int i = 1; i <= STUDENT_COUNT; i++) {
-			Student student = new Student(faker.name().firstName(), faker.name().lastName(), randomSSN(),
-					EducationLevel.randomEducationLevel(), Residency.randomEducationLevel());
+			String fName = faker.name().firstName();
+			String lName = faker.name().lastName();
+			String email = fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+			Student student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+			student.setCompleted(studentService.validateStudentObject(student));
 			studentService.createStudent(student);
 		}
 	}
