@@ -25,7 +25,12 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public Admission getAdmissionRecordByStudentId(int id) {
 		Student student = studentService.getstudent(id);
-		return admissionRepository.findByStudent(student.getId());
+		Admission admission = admissionRepository.findByStudent(student.getId());
+		
+		if( admission == null) {
+			throw new AdmissionNotfound("admission not found with Student ID" + id);
+		}
+		return admission;
 	}
 
 	@Override
