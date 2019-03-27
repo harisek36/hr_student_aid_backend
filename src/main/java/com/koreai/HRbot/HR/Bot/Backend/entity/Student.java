@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -18,11 +19,12 @@ public class Student {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
-//	private String ssn;
-//	private String educationLevel;
-//	private String residency;
-	private boolean completed = false;
 
+	private boolean completed = false;
+	
+//    @OneToOne(mappedBy = "student")
+//	private Admission admission;
+    
 	public Student() {
 	}
 
