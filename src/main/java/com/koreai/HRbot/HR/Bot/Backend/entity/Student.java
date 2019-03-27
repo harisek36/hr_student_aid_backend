@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -22,8 +21,8 @@ public class Student {
 
 	private boolean completed = false;
 	
-//    @OneToOne(mappedBy = "student")
-//	private Admission admission;
+	// @OneToOne(mappedBy = "student")
+	// private Admission admission;
     
 	public Student() {
 	}

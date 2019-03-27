@@ -1,7 +1,6 @@
 package com.koreai.HRbot.HR.Bot.Backend.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
-import com.koreai.HRbot.HR.Bot.Backend.entity.Reimbursement;
 import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
 
 @CrossOrigin(origins = {"*"},  methods= {RequestMethod.GET, RequestMethod.POST},maxAge = 3600)
@@ -28,19 +26,19 @@ public class AdmissionController {
 	@Autowired AdmissionService admissionService;
 	
 	@GetMapping("{admissionId}")
-	ResponseEntity<Admission> getReimbursementWithId(@PathVariable int admissionId) {
+	ResponseEntity<Admission> getAdmissionWithId(@PathVariable int admissionId) {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(admissionService.getAdmissionById(admissionId));
 	}
 
 	@GetMapping("student/{studentId}")
-	ResponseEntity<Admission> getAllReimbursementWithEmployeeId(@PathVariable int studentId) {
+	ResponseEntity<Admission> getAlladmissionWithStudentId(@PathVariable int studentId) {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(admissionService.getAdmissionRecordByStudentId(studentId));
 	}
 
 	@PostMapping
-	ResponseEntity<Admission> createReimbursement(@RequestBody Admission admission) {
+	ResponseEntity<Admission> createadmission(@RequestBody Admission admission) {
 		
 		Admission newAdmission = admissionService.saveAdmission(admission);
 		
@@ -52,7 +50,5 @@ public class AdmissionController {
 		
 		return ResponseEntity.created(uri).body(newAdmission);
 	}
-
-	 
 
 }

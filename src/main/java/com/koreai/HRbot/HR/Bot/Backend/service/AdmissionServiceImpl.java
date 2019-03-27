@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 import com.koreai.HRbot.HR.Bot.Backend.exception.AdmissionNotfound;
+import com.koreai.HRbot.HR.Bot.Backend.exception.StudentNotFound;
 import com.koreai.HRbot.HR.Bot.Backend.repository.AdmissionRepository;
 
 @Service
@@ -25,6 +26,12 @@ public class AdmissionServiceImpl implements AdmissionService {
 
 	@Override
 	public Admission saveAdmission(Admission admission) {
+		
+		Student student = admission.getStudent();
+		
+		if(student == null) {
+			throw new StudentNotFound("Cannot create admission without student information");
+		}
 
 		return admissionRepository.save(admission);
 	}
