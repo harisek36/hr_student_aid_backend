@@ -26,9 +26,6 @@ public class Admission {
 	private boolean completed = false;
 	private boolean started = false;
 
-	@Transient
-	private List<String> remainderText = new ArrayList<>();
-
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true)
 	private Student student;
@@ -44,14 +41,5 @@ public class Admission {
 		this.student = student;
 	}
 
-	public void setRemainderWithDefaultValues() {
-
-	
-		remainderText.add("Application deadline for " + this.getMajor() + "major " + this.getGradLevel()
-		+ " student is " + LocalDate.now().plusDays(30).toString());
-	
-		remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
-
-	}
 
 }

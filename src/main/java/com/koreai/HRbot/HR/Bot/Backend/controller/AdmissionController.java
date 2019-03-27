@@ -74,5 +74,24 @@ public class AdmissionController {
 		
 		return remainderText;
 	}
+	
+	@GetMapping("student/{studentId}/remainder")
+	List<String> getAdmissionRemainderByStudentId(@PathVariable int studentId) {
+		
+		List<String> remainderText = new ArrayList<>();
+		Admission admission = admissionService.getAdmissionRecordByStudentId(studentId);
+		
+		if(admission != null && admission.getMajor() != null && admission.getGradLevel() != null) {
+			
+			remainderText.add("Application deadline for " + admission.getMajor() + "major " + admission.getGradLevel()
+			+ " student is " + LocalDate.now().plusDays(30).toString());
+			
+			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
+			
+			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+		}
+		
+		return remainderText;
+	}
 
 }

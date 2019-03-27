@@ -87,7 +87,6 @@ public class AdmissionServiceImpl implements AdmissionService {
 			remainderList.add(remainder);
 		}
 		
-		admission.setRemainderText(remainderList);
 	}
 
 }
