@@ -80,11 +80,13 @@ public class InitController {
 			String email = fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
 			Student student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
 			student.setCompleted(studentService.validateStudentObject(student));
-			Admission admission = new Admission(EducationLevel.randomEducationLevel(), "InState", "Engineering",student);
+			Student studentCreated =  studentService.createStudent(student);
+			
+
+			Admission admission = new Admission(EducationLevel.randomEducationLevel(), "", "Engineering",studentCreated.getId());
 			admission.setStarted(admissionService.isProcessStarted(admission));
 			admission.setCompleted(admissionService.isProcessCompleted(admission));
 			admissionService.saveAdmission(admission);
-			studentService.createStudent(student);
 		}
 	}
 

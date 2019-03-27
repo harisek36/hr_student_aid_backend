@@ -9,6 +9,6 @@ import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 @Repository
 public interface AdmissionRepository extends JpaRepository<Admission, Integer> {
 
-	Admission findByStudent(Student student);
+	Admission findByStudent(int student);
 
 }

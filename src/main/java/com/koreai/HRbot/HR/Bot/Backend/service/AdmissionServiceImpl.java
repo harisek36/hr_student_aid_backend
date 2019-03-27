@@ -25,13 +25,13 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public Admission getAdmissionRecordByStudentId(int id) {
 		Student student = studentService.getstudent(id);
-		return admissionRepository.findByStudent(student);
+		return admissionRepository.findByStudent(student.getId());
 	}
 
 	@Override
 	public Admission saveAdmission(Admission admission) {
 
-		Student student = admission.getStudent();
+		Student student = studentService.getstudent(admission.getStudent());
 
 		if (student == null) {
 			throw new StudentNotFound("Cannot create admission without student information");

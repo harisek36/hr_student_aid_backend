@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
+import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 import com.koreai.HRbot.HR.Bot.Backend.entity.StudentRemainder;
 import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
+import com.koreai.HRbot.HR.Bot.Backend.service.StudentService;
 
 @CrossOrigin(origins = {"*"},  methods= {RequestMethod.GET, RequestMethod.POST},maxAge = 3600)
 @RestController
@@ -28,6 +30,8 @@ import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
 public class AdmissionController {
 	
 	@Autowired AdmissionService admissionService;
+	
+	@Autowired StudentService studentService;
 	
 	@GetMapping("{admissionId}")
 	ResponseEntity<Admission> getAdmissionWithId(@PathVariable int admissionId) {
@@ -44,13 +48,14 @@ public class AdmissionController {
 	@PostMapping
 	ResponseEntity<Admission> createadmission(@RequestBody Admission admission) {
 		
+		studentService.getstudent(admission.getStudent());
+
+		
 		Admission newAdmission = admissionService.saveAdmission(admission);
 		
 		newAdmission.setStarted(admissionService.isProcessStarted(newAdmission));
 		newAdmission.setCompleted(admissionService.isProcessCompleted(newAdmission));
-		
-		admissionService.setRemainderString(newAdmission);
-		
+				
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdmission.getId())
 				.toUri();
 		
