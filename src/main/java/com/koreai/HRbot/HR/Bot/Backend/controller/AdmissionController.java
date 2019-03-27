@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
+import com.koreai.HRbot.HR.Bot.Backend.entity.StudentRemainder;
 import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
 
 @CrossOrigin(origins = {"*"},  methods= {RequestMethod.GET, RequestMethod.POST},maxAge = 3600)
@@ -57,7 +58,9 @@ public class AdmissionController {
 	}
 	
 	@GetMapping("{admissionId}/remainder")
-	List<String> getAdmissionRemainder(@PathVariable int admissionId) {
+	StudentRemainder getAdmissionRemainder(@PathVariable int admissionId) {
+		
+		StudentRemainder studentRemainder = new StudentRemainder();
 		
 		List<String> remainderText = new ArrayList<>();
 		Admission admission = admissionService.getAdmissionById(admissionId);
@@ -72,11 +75,15 @@ public class AdmissionController {
 			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
 		}
 		
-		return remainderText;
+		studentRemainder.setRemainderList(remainderText);
+		
+		return studentRemainder;
 	}
 	
 	@GetMapping("student/{studentId}/remainder")
-	List<String> getAdmissionRemainderByStudentId(@PathVariable int studentId) {
+	StudentRemainder getAdmissionRemainderByStudentId(@PathVariable int studentId) {
+		
+		StudentRemainder studentRemainder = new StudentRemainder();
 		
 		List<String> remainderText = new ArrayList<>();
 		Admission admission = admissionService.getAdmissionRecordByStudentId(studentId);
@@ -91,7 +98,9 @@ public class AdmissionController {
 			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
 		}
 		
-		return remainderText;
+		studentRemainder.setRemainderList(remainderText);
+		
+		return studentRemainder;
 	}
 
 }
