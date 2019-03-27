@@ -55,11 +55,14 @@ public class AdmissionController {
 		
 		newAdmission.setStarted(admissionService.isProcessStarted(newAdmission));
 		newAdmission.setCompleted(admissionService.isProcessCompleted(newAdmission));
+		
+		Admission finalAdmission = admissionService.saveAdmission(newAdmission);
+
 				
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdmission.getId())
 				.toUri();
 		
-		return ResponseEntity.created(uri).body(newAdmission);
+		return ResponseEntity.created(uri).body(finalAdmission);
 	}
 	
 	@GetMapping("{admissionId}/remainder")
