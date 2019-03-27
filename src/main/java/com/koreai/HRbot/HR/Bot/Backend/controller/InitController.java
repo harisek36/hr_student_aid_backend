@@ -83,7 +83,7 @@ public class InitController {
 			Admission admission = new Admission(EducationLevel.randomEducationLevel(), "InState", "Engineering",student);
 			admission.setStarted(admissionService.isProcessStarted(admission));
 			admission.setCompleted(admissionService.isProcessCompleted(admission));
-			
+			admission.setRemainderWithDefaultValues();
 			admissionService.saveAdmission(admission);
 			studentService.createStudent(student);
 		}

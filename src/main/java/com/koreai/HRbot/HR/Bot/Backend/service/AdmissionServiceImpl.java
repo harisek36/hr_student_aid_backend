@@ -1,5 +1,9 @@
 package com.koreai.HRbot.HR.Bot.Backend.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +30,10 @@ public class AdmissionServiceImpl implements AdmissionService {
 
 	@Override
 	public Admission saveAdmission(Admission admission) {
-		
+
 		Student student = admission.getStudent();
-		
-		if(student == null) {
+
+		if (student == null) {
 			throw new StudentNotFound("Cannot create admission without student information");
 		}
 
@@ -45,10 +49,10 @@ public class AdmissionServiceImpl implements AdmissionService {
 
 	@Override
 	public boolean isProcessStarted(Admission admission) {
-		if(admission == null) {
+		if (admission == null) {
 			return false;
 		}
-		if(admission.getMajor() != null || admission.getGradLevel() != null || admission.getState() != null) {
+		if (admission.getMajor() != null || admission.getGradLevel() != null || admission.getState() != null) {
 			return true;
 		}
 		return false;
@@ -56,16 +60,34 @@ public class AdmissionServiceImpl implements AdmissionService {
 
 	@Override
 	public boolean isProcessCompleted(Admission admission) {
-		if(admission == null) {
+		if (admission == null) {
 			return false;
 		}
-		if(admission.getMajor() == null || admission.getGradLevel() == null || admission.getState() == null) {
+		if (admission.getMajor() == null || admission.getGradLevel() == null || admission.getState() == null) {
 			return false;
 		}
-		if(admission.getMajor().trim().equals("") || admission.getGradLevel().trim().equals("") || admission.getState().trim().equals("")) {
+		if (admission.getMajor().trim().equals("") || admission.getGradLevel().trim().equals("")
+				|| admission.getState().trim().equals("")) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void setRemainderString(Admission admission) {
+		
+		List<String> remainderList = new ArrayList<>();
+
+		String remainder = "";
+		if (admission != null) {
+			remainder = "Application deadline for " + admission.getMajor() + "major " + admission.getGradLevel()
+					+ " student is " + LocalDate.now().plusDays(30).toString();
+			remainderList.add(remainder);
+			remainder = "Number of LOR's (Letter of Recomendations) required: 3";
+			remainderList.add(remainder);
+		}
+		
+		admission.setRemainderText(remainderList);
 	}
 
 }

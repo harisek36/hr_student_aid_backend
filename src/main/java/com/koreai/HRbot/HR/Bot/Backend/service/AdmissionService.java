@@ -1,5 +1,7 @@
 package com.koreai.HRbot.HR.Bot.Backend.service;
 
+import java.util.List;
+
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
 
 public interface AdmissionService {
@@ -13,4 +15,6 @@ public interface AdmissionService {
 	boolean isProcessStarted(Admission admission);
 	
 	boolean isProcessCompleted(Admission admission);
+	
+	void setRemainderString(Admission admission); 
 }

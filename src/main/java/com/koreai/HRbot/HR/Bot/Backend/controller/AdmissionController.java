@@ -1,6 +1,9 @@
 package com.koreai.HRbot.HR.Bot.Backend.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,10 +48,31 @@ public class AdmissionController {
 		newAdmission.setStarted(admissionService.isProcessStarted(newAdmission));
 		newAdmission.setCompleted(admissionService.isProcessCompleted(newAdmission));
 		
+		admissionService.setRemainderString(newAdmission);
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdmission.getId())
 				.toUri();
 		
 		return ResponseEntity.created(uri).body(newAdmission);
+	}
+	
+	@GetMapping("{admissionId}/remainder")
+	List<String> getAdmissionRemainder(@PathVariable int admissionId) {
+		
+		List<String> remainderText = new ArrayList<>();
+		Admission admission = admissionService.getAdmissionById(admissionId);
+		
+		if(admission != null && admission.getMajor() != null && admission.getGradLevel() != null) {
+			
+			remainderText.add("Application deadline for " + admission.getMajor() + "major " + admission.getGradLevel()
+			+ " student is " + LocalDate.now().plusDays(30).toString());
+			
+			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
+			
+			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+		}
+		
+		return remainderText;
 	}
 
 }
