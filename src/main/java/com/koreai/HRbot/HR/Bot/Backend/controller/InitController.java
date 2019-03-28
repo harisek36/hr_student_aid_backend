@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.javafaker.Faker;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
 import com.koreai.HRbot.HR.Bot.Backend.entity.EducationLevel;
+import com.koreai.HRbot.HR.Bot.Backend.entity.EducationMajor;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Employee;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Residency;
+import com.koreai.HRbot.HR.Bot.Backend.entity.ResidencyStatus;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
 import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
 import com.koreai.HRbot.HR.Bot.Backend.service.EmployeeService;
@@ -30,7 +32,7 @@ public class InitController {
 
 	private static int MANAGER_COUNT = 5;
 	private static int EMPLOYEE_UNDER_MANAGER_COUNT = 15;
-	private static int STUDENT_COUNT = 10;
+	private static int STUDENT_COUNT = 5;
 
 	@Autowired
 	EmployeeService employeeService;
@@ -90,7 +92,7 @@ public class InitController {
 			Student studentCreated =  studentService.createStudent(student);
 			
 
-			Admission admission = new Admission(EducationLevel.randomEducationLevel(), "", "Engineering",studentCreated.getId());
+			Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
 			admission.setStarted(admissionService.isProcessStarted(admission));
 			admission.setCompleted(admissionService.isProcessCompleted(admission));
 			admissionService.saveAdmission(admission);
