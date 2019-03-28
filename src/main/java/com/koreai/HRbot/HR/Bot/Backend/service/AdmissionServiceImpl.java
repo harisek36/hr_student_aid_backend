@@ -44,7 +44,9 @@ public class AdmissionServiceImpl implements AdmissionService {
 		
 		Admission oldadmission = admissionRepository.findByStudent(student.getId());
 		
-		admissionRepository.delete(oldadmission);
+		if(oldadmission != null) {
+			admissionRepository.delete(oldadmission);
+		}
 
 		return admissionRepository.save(admission);
 	}
