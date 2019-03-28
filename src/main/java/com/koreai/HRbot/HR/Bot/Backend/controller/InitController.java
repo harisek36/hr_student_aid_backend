@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,12 @@ public class InitController {
 	@Autowired AdmissionService admissionService;
 
 	Faker faker;
+	
+	@GetMapping
+	String appStart() {
+		return "Student Aid Backend Service";
+	}
+	
 
 	@PostConstruct
 	void employeeTestCreationInit() throws IllegalArgumentException, IllegalAccessException {
