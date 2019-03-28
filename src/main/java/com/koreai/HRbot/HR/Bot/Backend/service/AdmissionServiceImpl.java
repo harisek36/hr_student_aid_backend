@@ -41,6 +41,10 @@ public class AdmissionServiceImpl implements AdmissionService {
 		if (student == null) {
 			throw new StudentNotFound("Cannot create admission without student information");
 		}
+		
+		Admission oldadmission = admissionRepository.findByStudent(student.getId());
+		
+		admissionRepository.delete(oldadmission);
 
 		return admissionRepository.save(admission);
 	}
