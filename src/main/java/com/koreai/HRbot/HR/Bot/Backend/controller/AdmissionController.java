@@ -91,7 +91,7 @@ public class AdmissionController {
 			
 			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
 			
-			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+			remainderText.add("LOR deadline for " + admission.getMajor() + " major student is " + LocalDate.now().plusDays(40).toString());
 		}
 		
 		studentRemainder.setRemainderList(remainderText);
@@ -115,7 +115,7 @@ public class AdmissionController {
 			
 			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
 			
-			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+			remainderText.add("LOR deadline for " + admission.getMajor() + " major student is " + LocalDate.now().plusDays(40).toString());
 		}
 		
 		studentRemainder.setRemainderList(remainderText);
@@ -138,7 +138,7 @@ public class AdmissionController {
 			
 			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
 			
-			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+			remainderText.add("LOR deadline for " + admission.getMajor() + " major student is " + LocalDate.now().plusDays(40).toString());
 		}
 		
 		studentRemainder.setRemainderList(remainderText);
