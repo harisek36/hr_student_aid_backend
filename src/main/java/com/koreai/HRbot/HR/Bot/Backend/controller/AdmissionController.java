@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Admission;
 import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
+import com.koreai.HRbot.HR.Bot.Backend.entity.StudentLoginStatus;
 import com.koreai.HRbot.HR.Bot.Backend.entity.StudentRemainder;
 import com.koreai.HRbot.HR.Bot.Backend.service.AdmissionService;
 import com.koreai.HRbot.HR.Bot.Backend.service.StudentService;
@@ -42,14 +43,24 @@ public class AdmissionController {
 	@GetMapping("student/{studentId}")
 	ResponseEntity<Admission> getAlladmissionWithStudentId(@PathVariable int studentId) {
 		
+		Student student = studentService.getstudent(studentId);
+
+		
+		if(student != null) {
+			StudentLoginStatus.currentStudet = studentId;
+		}
+		
 		return ResponseEntity.status(HttpStatus.OK).body(admissionService.getAdmissionRecordByStudentId(studentId));
 	}
 
 	@PostMapping
 	ResponseEntity<Admission> createadmission(@RequestBody Admission admission) {
 		
-		studentService.getstudent(admission.getStudent());
-
+		Student student = studentService.getstudent(admission.getStudent());
+		
+		if(student != null) {
+			StudentLoginStatus.currentStudet = student.getId();
+		}
 		
 		Admission newAdmission = admissionService.saveAdmission(admission);
 		
@@ -64,9 +75,33 @@ public class AdmissionController {
 		
 		return ResponseEntity.created(uri).body(finalAdmission);
 	}
+
+	@GetMapping("remainder")
+	StudentRemainder getAdmissionRemainder() {
+		
+		StudentRemainder studentRemainder = new StudentRemainder();
+		
+		List<String> remainderText = new ArrayList<>();
+		Admission admission = admissionService.getAdmissionRecordByStudentId(StudentLoginStatus.currentStudet);
+		
+		if(admission != null && admission.getMajor() != null && admission.getGradLevel() != null) {
+			
+			remainderText.add("Application deadline for " + admission.getMajor() + " major " + admission.getGradLevel()
+			+ " student is " + LocalDate.now().plusDays(30).toString());
+			
+			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
+			
+			remainderText.add("LOR deadline for " + admission.getMajor() + "major student is " + LocalDate.now().plusDays(40).toString());
+		}
+		
+		studentRemainder.setRemainderList(remainderText);
+		
+		return studentRemainder;
+	}
+	
 	
 	@GetMapping("{admissionId}/remainder")
-	StudentRemainder getAdmissionRemainder(@PathVariable int admissionId) {
+	StudentRemainder getAdmissionRemainderByAdmissionId(@PathVariable int admissionId) {
 		
 		StudentRemainder studentRemainder = new StudentRemainder();
 		
@@ -75,7 +110,7 @@ public class AdmissionController {
 		
 		if(admission != null && admission.getMajor() != null && admission.getGradLevel() != null) {
 			
-			remainderText.add("Application deadline for " + admission.getMajor() + "major " + admission.getGradLevel()
+			remainderText.add("Application deadline for " + admission.getMajor() + " major " + admission.getGradLevel()
 			+ " student is " + LocalDate.now().plusDays(30).toString());
 			
 			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");
@@ -98,7 +133,7 @@ public class AdmissionController {
 		
 		if(admission != null && admission.getMajor() != null && admission.getGradLevel() != null) {
 			
-			remainderText.add("Application deadline for " + admission.getMajor() + "major " + admission.getGradLevel()
+			remainderText.add("Application deadline for " + admission.getMajor() + " major " + admission.getGradLevel()
 			+ " student is " + LocalDate.now().plusDays(30).toString());
 			
 			remainderText.add("Number of LOR's (Letter of Recomendations) required: 3");

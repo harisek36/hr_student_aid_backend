@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.koreai.HRbot.HR.Bot.Backend.entity.Student;
+import com.koreai.HRbot.HR.Bot.Backend.entity.StudentLoginStatus;
 import com.koreai.HRbot.HR.Bot.Backend.service.StudentService;
 
 @CrossOrigin(origins = { "*" }, methods = { RequestMethod.GET, RequestMethod.POST }, maxAge = 3600)
@@ -32,6 +33,10 @@ public class StudentController {
 	ResponseEntity<Student> getStudentWithId(@PathVariable int studentId) throws IllegalArgumentException, IllegalAccessException {
 		Student student = studentService.getstudent(studentId);
 		student.setCompleted(studentService.validateStudentObject(student));
+		
+		if(student != null) {
+			StudentLoginStatus.currentStudet = studentId;
+		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(student);
 	}
@@ -49,6 +54,10 @@ public class StudentController {
 		newStudent.setCompleted(studentService.validateStudentObject(newStudent));
 		
 		Student savedStudent = studentService.createStudent(newStudent);
+		
+		if(savedStudent != null) {
+			StudentLoginStatus.currentStudet = savedStudent.getId();
+		}
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedStudent.getId()).toUri();
