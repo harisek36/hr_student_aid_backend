@@ -56,7 +56,7 @@ public class InitController {
 	@PostConstruct
 	void employeeTestCreationInit() throws IllegalArgumentException, IllegalAccessException {
 		faker = new Faker();
-		Random rand = new Random();
+//		Random rand = new Random();
 
 //		List<String> employeeJobDescribtionList = Arrays.asList("Software Developer", "Operations Analyst",
 //				"Graphic Designer", "Hardware Engineer", "Web Designer");
@@ -83,20 +83,44 @@ public class InitController {
 //		}
 
 		// student
+		
+		String fName = faker.name().firstName();
+		Student student = new Student(fName, null, null, faker.phoneNumber().cellPhone());
+		student.setCompleted(studentService.validateStudentObject(student));
+		Student studentCreated =  studentService.createStudent(student);
+		
+
+		Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+		admission.setStarted(admissionService.isProcessStarted(admission));
+		admission.setCompleted(admissionService.isProcessCompleted(admission));
+		admissionService.saveAdmission(admission);
+		
 		for (int i = 1; i <= STUDENT_COUNT; i++) {
-			String fName = faker.name().firstName();
+			 fName = faker.name().firstName();
 			String lName = faker.name().lastName();
 			String email = fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
-			Student student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+			student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
 			student.setCompleted(studentService.validateStudentObject(student));
-			Student studentCreated =  studentService.createStudent(student);
+			studentCreated =  studentService.createStudent(student);
 			
 
-			Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+			admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
 			admission.setStarted(admissionService.isProcessStarted(admission));
 			admission.setCompleted(admissionService.isProcessCompleted(admission));
 			admissionService.saveAdmission(admission);
 		}
+		
+		
+		fName = faker.name().firstName();
+		student = new Student(fName, null, null, faker.phoneNumber().cellPhone());
+		student.setCompleted(studentService.validateStudentObject(student));
+		studentCreated =  studentService.createStudent(student);
+		
+
+		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+		admission.setStarted(admissionService.isProcessStarted(admission));
+		admission.setCompleted(admissionService.isProcessCompleted(admission));
+		admissionService.saveAdmission(admission);
 	}
 
 	String randomSSN() {

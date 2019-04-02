@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ResidencyStatus {
-	private static final List<String> VALUES = Collections.unmodifiableList(Arrays.asList("In-State", "Out-of-State"));
+	private static final List<String> VALUES = Collections.unmodifiableList(Arrays.asList("In-State", "Out-of-State", null, ""));
 	private static final int SIZE = VALUES.size();
 	private static final Random RANDOM = new Random();
 
