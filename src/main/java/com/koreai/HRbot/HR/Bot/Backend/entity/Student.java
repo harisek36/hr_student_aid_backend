@@ -13,9 +13,10 @@ import lombok.Data;
 @Data
 @Entity
 public class Student {
+	
+	public static int idInit = 1000;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -23,16 +24,15 @@ public class Student {
 	private String phoneNumber;
 
 	private boolean completed = false;
-	
-//	 @OneToOne(mappedBy = "student")
-//	 @JsonIgnore
-//	 private Admission admission;
-    
+	    
 	public Student() {
+		this.id = idInit + 1;
+		idInit = idInit + 1;
 	}
 
 	public Student(String firstName, String lastName, String email, String phoneNumber) {
-		super();
+		this.id = idInit + 1;
+		idInit = idInit + 1;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
