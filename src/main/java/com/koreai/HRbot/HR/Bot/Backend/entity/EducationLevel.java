@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class EducationLevel {
-	private static final List<String> VALUES = Collections.unmodifiableList(Arrays.asList("GraduateStudent", "UnderGraduateStudent"));
+	private static final List<String> VALUES = Collections.unmodifiableList(Arrays.asList("GraduateStudent", "UnderGraduateStudent", null, ""));
 	private static final int SIZE = VALUES.size();
 	private static final Random RANDOM = new Random();
 

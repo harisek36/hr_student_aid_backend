@@ -84,43 +84,105 @@ public class InitController {
 
 		// student
 		
-		String fName = faker.name().firstName();
-		Student student = new Student(fName, null, null, faker.phoneNumber().cellPhone());
-		student.setCompleted(studentService.validateStudentObject(student));
-		Student studentCreated =  studentService.createStudent(student);
-		
-
-		Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
-		admission.setStarted(admissionService.isProcessStarted(admission));
-		admission.setCompleted(admissionService.isProcessCompleted(admission));
-		admissionService.saveAdmission(admission);
+		String fName = "";
+		String lName = "";
+		String email =  "";
+		Student student;
+//
+//		Student student = new Student("Dana", "Casper", "dana.casper@gmail.com", faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		Student studentCreated =  studentService.createStudent(student);
+//		
+//
+//		Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
 		
 		for (int i = 1; i <= STUDENT_COUNT; i++) {
-			 fName = faker.name().firstName();
-			String lName = faker.name().lastName();
-			String email = fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+			fName = faker.name().firstName();
+			lName = faker.name().lastName();
+			email = fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
 			student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
 			student.setCompleted(studentService.validateStudentObject(student));
-			studentCreated =  studentService.createStudent(student);
+			Student studentCreated =  studentService.createStudent(student);
 			
 
-			admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+			Admission admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
 			admission.setStarted(admissionService.isProcessStarted(admission));
 			admission.setCompleted(admissionService.isProcessCompleted(admission));
 			admissionService.saveAdmission(admission);
 		}
 		
 		
-		fName = faker.name().firstName();
-		student = new Student(fName, null, null, faker.phoneNumber().cellPhone());
-		student.setCompleted(studentService.validateStudentObject(student));
-		studentCreated =  studentService.createStudent(student);
-		
-
-		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
-		admission.setStarted(admissionService.isProcessStarted(admission));
-		admission.setCompleted(admissionService.isProcessCompleted(admission));
-		admissionService.saveAdmission(admission);
+//		student = new Student("Ram", null, "ram.kumar@gmail.com", faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		studentCreated =  studentService.createStudent(student);
+//		
+//
+//		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), null,studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
+//	
+//		fName = faker.name().firstName();
+//		lName = faker.name().lastName();
+//		email =  fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+//		
+//		student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		studentCreated =  studentService.createStudent(student);
+//		
+//
+//		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
+//	
+//		fName = faker.name().firstName();
+//		lName = faker.name().lastName();
+//		email =  fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+//		
+//		student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		studentCreated =  studentService.createStudent(student);
+//		
+//
+//		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
+//	
+//		fName = faker.name().firstName();
+//		lName = faker.name().lastName();
+//		email =  fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+//		
+//		student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		studentCreated =  studentService.createStudent(student);
+//		
+//
+//		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
+//	
+//	
+//		
+//		
+//		fName = faker.name().firstName();
+//		lName = faker.name().lastName();
+//		email =  fName.toLowerCase() + "." + lName.toLowerCase() + "@gmail.com";
+//		
+//		student = new Student(fName, lName, email, faker.phoneNumber().cellPhone());
+//		student.setCompleted(studentService.validateStudentObject(student));
+//		studentCreated =  studentService.createStudent(student);
+//		
+//
+//		admission = new Admission(EducationLevel.randomEducationLevel(), ResidencyStatus.randomResidencyStatus(), EducationMajor.randomEducationMajor(),studentCreated.getId());
+//		admission.setStarted(admissionService.isProcessStarted(admission));
+//		admission.setCompleted(admissionService.isProcessCompleted(admission));
+//		admissionService.saveAdmission(admission);
 	}
 
 	String randomSSN() {
