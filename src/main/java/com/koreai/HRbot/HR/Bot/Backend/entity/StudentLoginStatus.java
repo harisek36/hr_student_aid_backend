@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StudentLoginStatus {
-	public static int currentStudet = 1001;
+	public static int currentStudet = 1000;
 	Student student;
 	boolean loggedIn;
 

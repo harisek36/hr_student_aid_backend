@@ -26,28 +26,16 @@ public class Student {
 	private boolean completed = false;
 	    
 	public Student() {
-		this.id = idInit + 1;
-		idInit = idInit + 1;
+//		this.id = idInit;
 	}
 
 	public Student(String firstName, String lastName, String email, String phoneNumber) {
-		this.id = idInit + 1;
-		idInit = idInit + 1;
+		idInit++;
+		this.id = idInit;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
-
-//	public Student(String firstName, String lastName, String ssn, String educationLevel, String residency) {
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.ssn = ssn;
-//		this.educationLevel = educationLevel;
-//		this.residency = residency;
-//		
-//	}
 	
-	
-
 }

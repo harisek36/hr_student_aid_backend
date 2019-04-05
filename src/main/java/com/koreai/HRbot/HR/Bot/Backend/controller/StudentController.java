@@ -51,6 +51,8 @@ public class StudentController {
 	@PostMapping
 	ResponseEntity<Student> createStudent(@RequestBody Student newStudent) throws IllegalArgumentException, IllegalAccessException {
 		
+		Student.idInit++;
+		newStudent.setId(Student.idInit);
 		newStudent.setCompleted(studentService.validateStudentObject(newStudent));
 		
 		Student savedStudent = studentService.createStudent(newStudent);

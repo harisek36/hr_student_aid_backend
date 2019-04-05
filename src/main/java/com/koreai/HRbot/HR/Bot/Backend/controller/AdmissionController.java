@@ -75,6 +75,12 @@ public class AdmissionController {
 		
 		return ResponseEntity.created(uri).body(finalAdmission);
 	}
+	
+	@GetMapping("currentStudent")
+	Student getCurrentAdmissionStudent( ) {
+		return studentService.getstudent(StudentLoginStatus.currentStudet);
+		
+	}
 
 	@GetMapping("remainder")
 	StudentRemainder getAdmissionRemainder() {
