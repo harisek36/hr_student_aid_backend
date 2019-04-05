@@ -23,6 +23,13 @@ public class CurrentStudent {
 
 		return currentStudentStatus;
 	}
+	
+	@GetMapping("reset")
+	boolean initCurrentStudnt() {
+		
+		StudentLoginStatus.currentStudet = 0;
+		return true;
+	}
 
 	@PostMapping("login")
 	StudentLoginStatus signInStudent(@RequestBody Student student) {
